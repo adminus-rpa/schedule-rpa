@@ -22,6 +22,7 @@
   const first = $derived<Lesson | null>(lessons[0] ?? null);
   const roomColor = $derived(floorColor(first?.room as string | undefined, config.cfg));
   const roomSplit = $derived(splitRoom(first?.room as string | undefined));
+  const roomIsWord = $derived(!!roomSplit.main && !/\d/.test(roomSplit.main));
   const subj = $derived(truncateSubject(first?.subject as string | undefined, subjectMax) || '—');
   const subjectFull = $derived(String(first?.subject ?? ''));
   const teacher = $derived(String(first?.teacher ?? ''));
@@ -46,7 +47,7 @@
     <div class="cell-room">
       <div class="room-box">
         {#if roomSplit.main}
-          <span class="room-main">{roomSplit.main}</span>
+          <span class="room-main" class:is-word={roomIsWord}>{roomSplit.main}</span>
           {#if roomSplit.tail}
             <span class="room-tail">{roomSplit.tail}</span>
           {/if}

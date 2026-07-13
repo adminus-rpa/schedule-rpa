@@ -439,9 +439,9 @@ body[data-progress="off"] .panel-university .panel-title { border-top: 3px solid
   font-variant-numeric: tabular-nums;
 }
 .slots-column-cell .slot-num-time {
-  font-size: .65rem;
+  font-size: clamp(.85rem, 1.5vh, 1.05rem);
   color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 600;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
   letter-spacing: 0;
@@ -656,6 +656,7 @@ body[data-glow="on"][data-glow-pulse="on"] .group-island {
   padding: .45rem .65rem;
   display: flex; align-items: center;
   min-width: 0;
+  min-height: 0;
   overflow: hidden;
 }
 .subject-text {
@@ -663,22 +664,26 @@ body[data-glow="on"][data-glow-pulse="on"] .group-island {
   font-size: var(--cell-fs);
   line-height: 1.25;
   color: var(--text);
-  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
   width: 100%;
   letter-spacing: -.005em;
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  word-break: break-word;
 }
 
 .cell-room {
   grid-area: room;
-  padding: .28rem .3rem;
+  padding: .28rem .35rem;
   display: flex; align-items: center; justify-content: center;
   border-left: 1px solid color-mix(in srgb, var(--lesson-border) 80%, transparent);
   background: color-mix(in srgb, var(--room-color) 8%, transparent);
-  width: calc(4ch + .9rem);
+  width: max-content;
   min-width: calc(4ch + .9rem);
-  max-width: calc(4ch + .9rem);
+  max-width: calc(6ch + 1.1rem);
   overflow: hidden;
 }
 .room-box {
@@ -690,12 +695,16 @@ body[data-glow="on"][data-glow-pulse="on"] .group-island {
   width: 100%;
 }
 .room-main {
-  font-size: 1.15rem;
+  font-size: clamp(.85rem, 1.15rem, 1.15rem);
   font-weight: 800;
   color: var(--room-color);
-  letter-spacing: -.02em;
+  letter-spacing: -.03em;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
+}
+.room-main.is-word {
+  font-size: .92rem;
+  letter-spacing: -.01em;
 }
 .room-tail {
   font-size: .62rem;
@@ -732,12 +741,10 @@ body[data-glow="on"][data-glow-pulse="on"] .group-island {
 .cell-teacher svg { flex-shrink: 0; opacity: .55; }
 .cell-teacher.is-empty { opacity: .55; font-style: italic; }
 
-/* Разделитель смен — коннектор между карточками выше высотой и с более яркой линией */
+/* Разделитель смен — просто увеличенный отступ между карточками, без линий */
 .lesson-connector.is-shift {
   flex-basis: calc(var(--island-row-gap, 10px) + 6px);
   margin: 3px 0;
-  border-top: 2px dashed color-mix(in srgb, var(--text-muted) 35%, transparent);
-  border-bottom: 2px dashed color-mix(in srgb, var(--text-muted) 35%, transparent);
 }
 
 /* =========================================================================
@@ -808,19 +815,10 @@ body[data-glow="on"][data-glow-pulse="on"] .group-island {
 .anim-none.enter-from, .anim-none.enter-to,
 .anim-none.leave-from, .anim-none.leave-to { transition: none; }
 
-/* Островки — микро-«всплывание» при появлении новой страницы */
-body[data-fancy="on"] .page.enter-from .group-island {
-  transform: translateY(10px) scale(.98);
-  opacity: 0;
-}
-body[data-fancy="on"] .page.enter-to .group-island {
-  animation: islandAppear var(--anim-ms) cubic-bezier(.22,1,.36,1) both;
-  animation-delay: calc(var(--i, 0) * 40ms);
-}
-@keyframes islandAppear {
-  from { transform: translateY(10px) scale(.98); opacity: 0; filter: blur(1px); }
-  to   { transform: translateY(0)    scale(1);   opacity: 1; filter: blur(0); }
-}
+/* Островки — индивидуальное плавное появление («всплывание») реализовано
+   как native Svelte in:-transition (см. islandAppear в utils/transitions.ts,
+   применяется в GroupIsland.svelte). Старый CSS-вариант через .enter-from/
+   .enter-to не работал, так как эти классы никогда не присваивались кодом. */
 
 /* УМЕНЬШЕНИЕ АНИМАЦИЙ для тех, кто это предпочитает */
 @media (prefers-reduced-motion: reduce) {

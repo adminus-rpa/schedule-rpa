@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { GroupData } from '$types/api';
   import type { Slot } from '$utils/slots';
+  import { config } from '$stores/config.svelte';
+  import { islandAppear } from '$utils/transitions';
   import LessonNode from './LessonNode.svelte';
 
   interface Props {
@@ -12,9 +14,15 @@
   let { group, slots, dateIso, index }: Props = $props();
 
   const dayLessons = $derived(group.days?.[dateIso] ?? {});
+  const fancy = $derived(config.cfg?.display?.fancy_animations !== false);
+  const microMs = $derived(Number(config.cfg?.display?.micro_anim_ms) || 420);
 </script>
 
-<div class="group-island" style="--i: {index};">
+<div
+  class="group-island"
+  style="--i: {index};"
+  in:islandAppear={fancy ? { index, duration: microMs, stagger: 40 } : { index: 0, duration: 0, stagger: 0 }}
+>
   <div class="group-island-header">
     <span class="group-name" title={group.name}>{group.name}</span>
   </div>

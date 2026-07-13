@@ -20,6 +20,14 @@ export function slotsForKind(kind: PanelKind, cfg: ConfigResponse | null): Slot[
 }
 
 /**
+ * Целевое (фиксированное) количество пар для панели.
+ * Колледж — всегда 6 пар, вуз — всегда 7 пар (независимо от факт. данных).
+ */
+export function desiredSlotCount(kind: PanelKind): number {
+  return kind === 'college' ? 6 : 7;
+}
+
+/**
  * Возвращает объединённый набор слотов: из конфига + дополнительные UR,
  * которые встретились в данных, но отсутствуют в bells.
  * Всегда возвращает не менее 7 слотов (пустые добавляются в конец).
@@ -44,12 +52,15 @@ export function buildAllSlots(kind: PanelKind, groups: GroupData[], cfg: ConfigR
 
   const slots = Array.from(slotByUr.values()).sort((a, b) => a.ur - b.ur);
 
-  // Гарантируем не менее 7 слотов
-  const desiredCount = 7;
+  // Фиксированное количество пар по типу панели: колледж = 6, вуз = 7.
+  const desiredCount = desiredSlotCount(kind);
   while (slots.length < desiredCount) {
     const nextUr = (slots.length ? slots[slots.length - 1].ur : 0) + 1;
-    slots.push({ ur: nextUr, time: '', shift: nextUr <= 3 ? 1 : 2 });
+    const lateThreshold = kind === 'university' ? 4 : 3;
+    slots.push({ ur: nextUr, time: '', shift: nextUr <= lateThreshold ? 1 : 2 });
   }
+  // Если факт. данных больше желаемого количества — не отсекаем (реальные пары важнее),
+  // но при точном совпадении с bells-конфигом длина будет равна desiredCount.
   return slots;
 }
 

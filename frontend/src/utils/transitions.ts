@@ -16,6 +16,7 @@ interface SwapParams {
 }
 
 interface TransitionConfig {
+  delay?: number;
   duration?: number;
   easing?: (t: number) => number;
   css?: (t: number, u: number) => string;
@@ -115,5 +116,25 @@ export function titleSlide(
       const dx = direction === 'in' ? sign * u * 30 : -sign * u * 30;
       return `opacity: ${t}; transform: translateX(${dx}px);`;
     }
+  };
+}
+
+/**
+ * Индивидуальное «всплывание» островка группы при появлении страницы.
+ * Заменяет неработающий CSS-подход (.enter-from/.enter-to никогда не
+ * применялись Svelte-транзишенами) на нативный in:-transition с
+ * покаскадной задержкой по индексу карточки.
+ */
+export function islandAppear(
+  _node: Element,
+  { index = 0, duration = 420, stagger = 40 }: { index?: number; duration?: number; stagger?: number } = {}
+): TransitionConfig {
+  const dur = Math.max(80, duration);
+  const delay = Math.max(0, index) * Math.max(0, stagger);
+  return {
+    duration: dur,
+    delay,
+    easing: cubicOut,
+    css: (t) => `transform: translateY(${(1 - t) * 10}px) scale(${0.98 + 0.02 * t}); opacity: ${t}; filter: blur(${(1 - t) * 1}px);`
   };
 }
