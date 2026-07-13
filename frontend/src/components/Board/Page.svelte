@@ -1,36 +1,17 @@
 <script lang="ts">
   import type { GroupData, PanelKind } from '$types/api';
   import type { Slot } from '$utils/slots';
-  import { config } from '$stores/config.svelte';
-  import { slotsForKind, desiredSlotCount } from '$utils/slots';
-  import SlotsColumn from './SlotsColumn.svelte';
   import GroupIsland from './GroupIsland.svelte';
 
   interface Props {
     kind: PanelKind;
     groups: GroupData[];
-    allSlots: Slot[];
+    slots: Slot[];
     dateIso: string;
   }
-  let { kind, groups, allSlots, dateIso }: Props = $props();
-
-  const slots = $derived.by<Slot[]>(() => {
-    const bells = slotsForKind(kind, config.cfg);
-    const bellsUrs = new Set(bells.map((s) => s.ur));
-    const extra = allSlots.filter((s) => !bellsUrs.has(s.ur));
-    const list = [...bells, ...extra].sort((a, b) => a.ur - b.ur);
-    // Колледж — всегда 6 пар, вуз — всегда 7 пар.
-    const desired = desiredSlotCount(kind);
-    const lateThreshold = kind === 'university' ? 4 : 3;
-    while (list.length < desired) {
-      const nextUr = (list.length ? list[list.length - 1].ur : 0) + 1;
-      list.push({ ur: nextUr, time: '', shift: nextUr <= lateThreshold ? 1 : 2 });
-    }
-    return list;
-  });
+  let { kind, groups, slots, dateIso }: Props = $props();
 </script>
 
-<SlotsColumn {slots} />
 {#if !groups.length}
   <div class="groups-row" style="grid-template-columns: 1fr;">
     <div class="empty-message">

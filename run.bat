@@ -17,5 +17,11 @@ if not exist ".venv\Scripts\python.exe" (
     ".venv\Scripts\python.exe" -m pip install -r requirements.txt
 )
 
+echo [build] Rebuilding Svelte frontend...
+cd frontend
+call npm install
+call npm run build
+cd ..
+
 echo [run] Starting server on http://0.0.0.0:9090  (Ctrl+C to stop)
 ".venv\Scripts\python.exe" run.py --host 0.0.0.0 --port 9090

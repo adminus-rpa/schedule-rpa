@@ -3,6 +3,7 @@
   import { titleSlide } from '$utils/transitions';
   import { config } from '$stores/config.svelte';
   import Icon from '$components/Icon.svelte';
+  import { fmtDateTitle } from '$utils/time';
 
   interface Props {
     kind: PanelKind;
@@ -10,8 +11,9 @@
     animKey: number;
     pageIdx: number;
     pageTotal: number;
+    dateIso: string;
   }
-  let { kind, animKey, pageIdx, pageTotal }: Props = $props();
+  let { kind, animKey, pageIdx, pageTotal, dateIso }: Props = $props();
 
   const isCollege = $derived(kind === 'college');
   const title = $derived(isCollege ? 'КОЛЛЕДЖ' : 'ВЫСШЕЕ ОБРАЗОВАНИЕ');
@@ -24,6 +26,7 @@
 </script>
 
 <div class="panel-title">
+  <span class="panel-date">{fmtDateTitle(dateIso)}</span>
   <div class="panel-title-stage" id="title-stage-{kind}">
     {#key animKey}
       {#if fancy}

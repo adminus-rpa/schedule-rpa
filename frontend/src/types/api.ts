@@ -104,7 +104,6 @@ export interface DisplayConfig {
   island_glow_radius?: number;
   island_glow_opacity?: number;
   progress_bar_enabled?: boolean;
-  auto_scroll?: boolean;
   [k: string]: unknown;
 }
 

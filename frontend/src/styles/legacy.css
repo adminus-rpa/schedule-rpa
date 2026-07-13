@@ -226,8 +226,8 @@ body.hide-topbar .topbar {
   min-height: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: 12px;
+  gap: 8px;
+  padding: 0;
 }
 body[data-layout="left_university"] #panel-college    { order: 2; }
 body[data-layout="left_university"] #panel-university { order: 1; }
@@ -375,13 +375,33 @@ body[data-progress="off"] .panel-university .panel-title { border-top: 3px solid
   transition: color .2s ease, border-color .2s ease;
 }
 
+.panel-date {
+  position: absolute; left: 1rem; top: 50%;
+  transform: translateY(-50%);
+  font-size: .75rem; font-weight: 600;
+  color: var(--text-muted);
+  padding: .2rem .6rem;
+  background: var(--surface);
+  border: 1px solid color-mix(in srgb, var(--grid-line) 80%, transparent);
+  border-radius: 999px;
+  transition: color .2s ease, border-color .2s ease;
+}
+
 .panel-body {
   flex: 1 1 auto;
   min-height: 0;
   position: relative;
   overflow: hidden;
-  padding: 14px;
+  display: grid;
+  grid-template-columns: var(--slot-col-w, 100px) 1fr;
+  gap: 8px;
+  padding: 12px 6px 14px 6px;
   contain: layout paint;
+}
+
+.panel-pages-container {
+  position: relative;
+  min-height: 0;
 }
 
 /* =========================================================================
@@ -392,10 +412,8 @@ body[data-progress="off"] .panel-university .panel-title { border-top: 3px solid
 .page {
   position: absolute;
   inset: 0;
-  display: grid;
-  grid-template-columns: var(--slot-col-w, 74px) 1fr;
-  gap: 12px;
-  padding: 12px 12px 14px;
+  display: flex;
+  flex-direction: column;
   will-change: transform, opacity, filter;
 }
 
@@ -439,12 +457,12 @@ body[data-progress="off"] .panel-university .panel-title { border-top: 3px solid
   font-variant-numeric: tabular-nums;
 }
 .slots-column-cell .slot-num-time {
-  font-size: clamp(.85rem, 1.5vh, 1.05rem);
+  font-size: clamp(.95rem, 1.7vh, 1.15rem);
   color: var(--text-muted);
-  font-weight: 600;
+  font-weight: 500;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  letter-spacing: 0;
+  letter-spacing: -0.05em;
 }
 /* Подсветка текущей пары — пастельно-сиреневый, ЛЁГКИЙ и ПРОЗРАЧНЫЙ */
 .slots-column-cell.is-now {
@@ -456,6 +474,8 @@ body[data-progress="off"] .panel-university .panel-title { border-top: 3px solid
 
 /* Строка островков */
 .groups-row {
+  flex: 1 1 auto;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(var(--groups-per-page, 3), minmax(0, 1fr));
   gap: 14px;
@@ -829,6 +849,7 @@ body[data-glow="on"][data-glow-pulse="on"] .group-island {
    Пустое состояние / overlay
    ------------------------------------------------------------------------- */
 .empty-message {
+  grid-column: 1 / -1;
   height: 100%;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;

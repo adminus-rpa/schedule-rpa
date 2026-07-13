@@ -4,11 +4,13 @@
   import { config } from '$stores/config.svelte';
   import { schedule } from '$stores/schedule.svelte';
   import { layout } from '$stores/layout.svelte';
-  import { buildAllSlots, computeGroupsPerPage } from '$utils/slots';
+  import { buildAllSlots, computeGroupsPerPage, slotsForKind, desiredSlotCount } from '$utils/slots';
+  import type { Slot } from '$utils/slots';
   import { todayISO } from '$utils/time';
   import { swapTransition } from '$utils/transitions';
   import PanelHeader from './PanelHeader.svelte';
   import Page from './Page.svelte';
+  import SlotsColumn from './SlotsColumn.svelte';
 
   interface Props {
     kind: PanelKind;
@@ -23,6 +25,20 @@
   );
 
   const allSlots = $derived(buildAllSlots(kind, groups, config.cfg));
+
+  const slots = $derived.by<Slot[]>(() => {
+    const bells = slotsForKind(kind, config.cfg);
+    const bellsUrs = new Set(bells.map((s) => s.ur));
+    const extra = allSlots.filter((s) => !bellsUrs.has(s.ur));
+    const list = [...bells, ...extra].sort((a, b) => a.ur - b.ur);
+    const desired = desiredSlotCount(kind);
+    const lateThreshold = kind === 'university' ? 4 : 3;
+    while (list.length < desired) {
+      const nextUr = (list.length ? list[list.length - 1].ur : 0) + 1;
+      list.push({ ur: nextUr, time: '', shift: nextUr <= lateThreshold ? 1 : 2 });
+    }
+    return list;
+  });
 
   const availWidth = $derived(layout.panelBodyWidth[kind]);
   const explicitPerPage = $derived(Number(config.cfg?.display?.groups_per_page) || 0);
@@ -94,6 +110,7 @@
     animKey={headerAnimKey}
     pageIdx={idx}
     pageTotal={total}
+    {dateIso}
   />
 
   <div class="panel-body" id="body-{kind}" bind:this={bodyEl}>
@@ -102,16 +119,19 @@
         <div class="empty-icon">📭</div>Нет данных
       </div>
     {:else}
-      {#key pageKey}
-        <div
-          class="page anim-{animName}"
-          style="--slot-count: {allSlots.length}; --groups-per-page: {slice.length};"
-          in:swapTransition={{ name: animName, duration: animMs, direction: 'in' }}
-          out:swapTransition={{ name: animName, duration: animMs, direction: 'out' }}
-        >
-          <Page {kind} groups={slice} {allSlots} {dateIso} />
-        </div>
-      {/key}
+      <SlotsColumn {slots} />
+      <div class="panel-pages-container">
+        {#key pageKey}
+          <div
+            class="page anim-{animName}"
+            style="--slot-count: {allSlots.length}; --groups-per-page: {slice.length};"
+            in:swapTransition={{ name: animName, duration: animMs, direction: 'in' }}
+            out:swapTransition={{ name: animName, duration: animMs, direction: 'out' }}
+          >
+            <Page {kind} groups={slice} {slots} {dateIso} />
+          </div>
+        {/key}
+      </div>
     {/if}
   </div>
 </section>

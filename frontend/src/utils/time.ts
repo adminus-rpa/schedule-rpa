@@ -40,6 +40,11 @@ export function fmtDateLong(iso: string): string {
   return `${wd}, ${d.getDate()} ${RU_MONTHS_GEN[d.getMonth()]}`;
 }
 
+export function fmtDateTitle(iso: string): string {
+  const d = parseISO(iso);
+  return `Расписание занятий на ${d.getDate()} ${RU_MONTHS_GEN[d.getMonth()]} ${d.getFullYear()}г.`;
+}
+
 export function fmtDateShort(iso: string): string {
   const d = parseISO(iso);
   return `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}`;

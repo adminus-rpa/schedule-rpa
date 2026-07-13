@@ -274,7 +274,9 @@ class ScheduleRepository:
             # Централизованные автозамены из конфига.
             if subject and self._subject_replacements:
                 subject = _apply_replacements(subject, self._subject_replacements)
-            if room and self._room_replacements:
+            if room is None:
+                room = ""
+            if self._room_replacements:
                 room = _apply_replacements(room, self._room_replacements)
 
             time_range = ur_time_by_group.get(idg, {}).get(ur, "")
