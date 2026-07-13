@@ -65,9 +65,11 @@
   }
 
   useRotation();
-</script>
 
-<svelte:body data-active-panel={layout.activePanel} />
+  $effect(() => {
+    document.body.setAttribute('data-active-panel', layout.activePanel);
+  });
+</script>
 
 <main class="board" id="board">
   {#if layoutMode !== 'alternate' || layout.activePanel === 'college'}

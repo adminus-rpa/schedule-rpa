@@ -67,6 +67,13 @@
     waitingInteraction = false;
     if (!fullscreen.isFullscreen) void fullscreen.toggle();
   };
+  $effect(() => {
+    if (layout.hideTopbar) {
+      document.body.classList.add('hide-topbar');
+    } else {
+      document.body.classList.remove('hide-topbar');
+    }
+  });
 </script>
 
 <svelte:document onvisibilitychange={onVisibilityChange} />
@@ -74,7 +81,6 @@
   onclick={waitingInteraction ? onInteraction : undefined} 
   onkeydown={waitingInteraction ? onInteraction : undefined} 
 />
-<svelte:body class:hide-topbar={layout.hideTopbar} />
 
 <div class="bg-layer" aria-hidden="true"></div>
 
