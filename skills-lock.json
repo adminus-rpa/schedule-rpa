@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "skills": {
+    "asshole": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "asshole/SKILL.md",
+      "computedHash": "54fbea3dbd35f4e843fc5269d593c729da7ab7cb1b0dd3ca20fe68418aabd1f2"
+    },
+    "ci-debug-workflow": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "ci-debug-workflow/SKILL.md",
+      "computedHash": "e618fd2043fca51953453a387a49303e30a2640b632fc53f3e9db308d3ee3616"
+    },
+    "deslop": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "deslop/SKILL.md",
+      "computedHash": "13dc9a910778c65d5311120f1be8776254b667fc821b06c530c9a6582595d212"
+    },
+    "ecosystem-guide": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "ecosystem-guide/SKILL.md",
+      "computedHash": "26f31bb7e8cc5fde85d12c1afcf99b7e05be1b27174bafe8adac2af72bbc414b"
+    },
+    "improve-codebase-architecture": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "improve-codebase-architecture/SKILL.md",
+      "computedHash": "5ba24042947af90b4b64251ed995b0d677fbfd72d42f9f775135ea3c89743f7c"
+    },
+    "nopeek": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "nopeek/SKILL.md",
+      "computedHash": "63baaa10dbd4460ee019a0498aceca952b4b8278f7a1952d72251e3bfa18bb48"
+    },
+    "orchestration": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "orchestration/SKILL.md",
+      "computedHash": "f16d0da1d3ea2f08ad659141cca22b134615c81cc24137c5eb30c5b89a27ad21"
+    },
+    "plugin-dev": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "plugin-dev/SKILL.md",
+      "computedHash": "27244a9b437741f20cf570065f04f4edda95e03342ddfaee107b2dda08a62a8e"
+    },
+    "reflect": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "reflect/SKILL.md",
+      "computedHash": "35223e82320a6ef4af7595f339b3e7338d9ea3a4d81363994d3ceb267146337a"
+    },
+    "research": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "research/SKILL.md",
+      "computedHash": "5017d82ede7235aa806aa644a4384d74c04fa3ee5e991f13aa00b6abd983cb87"
+    },
+    "skill-creator": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "skill-creator/SKILL.md",
+      "computedHash": "5bb9403b97d05b07db07bef1265b0cc7ce5c56c150b339ac3703bb1576377485"
+    },
+    "structured-rpi": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "structured-rpi/SKILL.md",
+      "computedHash": "59e9b527eaeab2e7732e1f9d019ffca9f0e2e4b0cc9831fbed8c679c3a71d12a"
+    },
+    "svelte-code-writer": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "svelte-code-writer/SKILL.md",
+      "computedHash": "9cb72827e3668ba37b5b5665cd6f90367046f78b1b4ebaaf7dc62851b03da10c"
+    },
+    "svelte-components": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "svelte-components/SKILL.md",
+      "computedHash": "e037d53f407da1d7a91a9994826da6aabbec19037306c884c4ae6ac663af521e"
+    },
+    "svelte-core-bestpractices": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "svelte-core-bestpractices/SKILL.md",
+      "computedHash": "1e595a32b88099999622dcc58fd28bfa47d0643177eeddf81a30540a4c2dc630"
+    },
+    "svelte-deployment": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "svelte-deployment/SKILL.md",
+      "computedHash": "e1ef4364a49d21c23a1309e83f00821ae4ed14861c82f775c3e58e49b58a4f47"
+    },
+    "svelte-layerchart": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "svelte-layerchart/SKILL.md",
+      "computedHash": "1ec51eebc92050461901b21d87e95010aaeb0e0222af9450eb897086d1400d19"
+    },
+    "svelte-runes": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "svelte-runes/SKILL.md",
+      "computedHash": "66e2cd28d38d9db8299ff0ce136fd693e597016c5ef901afef5c795933896f36"
+    },
+    "svelte-styling": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "svelte-styling/SKILL.md",
+      "computedHash": "e70c9dac2140ded81969f556e7a6f9cc30649877d04c0c0edfe63e0fb72d06df"
+    },
+    "svelte-template-directives": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "svelte-template-directives/SKILL.md",
+      "computedHash": "bfadbe21aff9651f7469c01a53e3532f379a0de639fcafa3ba66d931df20025d"
+    },
+    "sveltekit-data-flow": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "sveltekit-data-flow/SKILL.md",
+      "computedHash": "b9fc5fddb1acc0a51c7c3d3bb156535bd3f963a117ab6666e0b9209b7bfe0d27"
+    },
+    "sveltekit-remote-functions": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "sveltekit-remote-functions/SKILL.md",
+      "computedHash": "9b6231f92a837ad8c566ed861839fe62232df77ad4ae88960b86e79c47ca0f88"
+    },
+    "sveltekit-structure": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "sveltekit-structure/SKILL.md",
+      "computedHash": "0b4be89b604abd6e7b5664d203c3d0f0058b062ef50068c5b7cc7ea53add8164"
+    },
+    "tdd": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "tdd/SKILL.md",
+      "computedHash": "cec9ed0c5f9c08409305d037180ce8d11c3fd733c44ac32f7b33fbffdd0cbbd0"
+    },
+    "techdebt-finder": {
+      "source": "spences10/skills",
+      "sourceType": "github",
+      "skillPath": "techdebt-finder/SKILL.md",
+      "computedHash": "6fd58b66ca7a0582f7bd89cbea95c26c811fece9ec65d6532e8c3619453fa32a"
+    }
+  }
+}
