@@ -10,7 +10,7 @@ database:
   # На Windows: используйте прямые слэши или двойные обратные, например:
   #   path: "//fileserver/share/25-26 учебный год.mdb"
   #   path: "C:/rasp/25-26 учебный год.mdb"
-  path: "./schedule.mdb"
+  path: "//kzn1sfs02/Экспресс-расписание ВУЗ/CompactBD/25-26 учебный год.mdb"
 
   # Драйвер: auto | pyodbc | mdbtools
   # auto — pyodbc на Windows, mdbtools на Linux
